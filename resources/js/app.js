@@ -3,10 +3,11 @@ import './bootstrap';
 
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { createApp, h } from 'vue';
+import { createApp, h, ref } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
+import LoadingPage from '@/Components/LoadingPage.vue';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -18,7 +19,14 @@ createInertiaApp({
             import.meta.glob('./Pages/**/*.vue'),
         ),
     setup({ el, App, props, plugin }) {
-        return createApp({ render: () => h(App, props) })
+        const isLoading = ref(true);
+
+        return createApp({
+            render: () => (isLoading.value ? h(LoadingPage) : h(App, props)),
+            mounted() {
+                isLoading.value = false;
+            },
+        })
             .use(plugin)
             .use(ZiggyVue)
             .mount(el);

@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from "vue";
 import Checkbox from "@/Components/Checkbox.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
@@ -21,10 +22,10 @@ const form = useForm({
   remember: false,
 });
 
-const submit = () => {
-  form.post(route("login"), {
-    onFinish: () => form.reset("password"),
-  });
+// Toggle password visibility
+const showPassword = ref(false);
+const togglePassword = () => {
+  showPassword.value = !showPassword.value;
 };
 </script>
 
@@ -54,6 +55,16 @@ const submit = () => {
   bottom: 3%;
   left: 3%;
 }
+.password-wrapper {
+  position: relative;
+}
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateX(-10%);
+  cursor: pointer;
+}
 </style>
 
 <template>
@@ -68,9 +79,9 @@ const submit = () => {
 
     <form @submit.prevent="submit" class="form">
       <h3 class="text-dark text-center fw-semibold">Login</h3>
+
       <div>
         <InputLabel for="email" value="Email address" />
-
         <TextInput
           id="email"
           type="email"
@@ -82,16 +93,14 @@ const submit = () => {
           style="border-radius: 10px"
           placeholder="you@example.com"
         />
-
         <InputError class="mt-2" :message="form.errors.email" />
       </div>
 
-      <div class="mt-4">
+      <div class="mt-4 password-wrapper">
         <InputLabel for="password" value="Password" />
-
         <TextInput
           id="password"
-          type="password"
+          :type="showPassword ? 'text' : 'password'"
           class="mt-1 block w-full"
           v-model="form.password"
           required
@@ -99,18 +108,13 @@ const submit = () => {
           style="border-radius: 10px"
           placeholder="8 letters and long"
         />
-
+        <i
+          :class="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"
+          class="eye-icon"
+          @click="togglePassword"
+        ></i>
         <InputError class="mt-2" :message="form.errors.password" />
       </div>
-
-      <!-- <div class="mt-4 block">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600"
-                        >Remember me</span
-                    >
-                </label>
-            </div> -->
 
       <div class="mt-4 d-flex flex-column">
         <Link
@@ -138,4 +142,3 @@ const submit = () => {
     </form>
   </div>
 </template>
-
