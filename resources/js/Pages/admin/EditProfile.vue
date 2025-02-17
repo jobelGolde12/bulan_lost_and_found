@@ -1,6 +1,7 @@
 <script setup>
 import { useForm, Head } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import UploadImage from "@/Components/UploadImage.vue";
 import { defineProps } from "vue";
 
 const props = defineProps({
@@ -61,16 +62,19 @@ console.log("UserInfo => ", props.userInfo);
         class="form mx-auto"
         enctype="multipart/form-data"
       >
+      <UploadImage />
+
         <div class="row">
           <div class="col-12 col-lg-6">
-            <label for="profile_pic" class="block font-medium">Profile Picture</label>
-            <input
-              id="profile_pic"
-              type="file"
-              accept="image/*"
-              class="rounded px-3 py-2 w-full"
-              @change="handleFileChange"
-            />
+            <div class="mb-4 mt-2">
+              <label for="bio" class="block font-medium">Bio</label>
+              <textarea
+                v-model="form.bio"
+                id="bio"
+                class="rounded px-3 py-2 w-full"
+                placeholder="optional"
+              ></textarea>
+            </div>
           </div>
 
           <div class="col-12 col-lg-6 mt-2">
@@ -82,16 +86,6 @@ console.log("UserInfo => ", props.userInfo);
               placeholder="ex: Bonga, Bulan, Sorsogon"
             />
           </div>
-        </div>
-
-        <div class="mb-4 mt-2">
-          <label for="bio" class="block font-medium">Bio</label>
-          <textarea
-            v-model="form.bio"
-            id="bio"
-            class="rounded px-3 py-2 w-full"
-            placeholder="optional"
-          ></textarea>
         </div>
 
         <div class="row">
