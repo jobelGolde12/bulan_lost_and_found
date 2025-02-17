@@ -1,6 +1,7 @@
 
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
+import OffcanvasForProfile from "@/Components/admin/OffcanvasForProfile.vue";
 import { Head, usePage, Link } from "@inertiajs/vue3";
 import { computed, defineProps, onMounted, ref } from "vue";
 const user = usePage().props.auth.user;
@@ -18,6 +19,7 @@ onMounted(() => {
 <template>
   <Head title="My profile" />
   <AdminLayout>
+    <OffcanvasForProfile />
     <div class="main-container1">
       <div
         class="container-fluid d-flex flex-column justify-content-center align-items-center pt-5 gap-2"
