@@ -85,7 +85,7 @@ onMounted(() => {
 .main-container1 {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 0 2rem;

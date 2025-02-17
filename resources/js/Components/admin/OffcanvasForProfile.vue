@@ -14,6 +14,7 @@ import { Link } from '@inertiajs/vue3';
   </div>
   <div class="offcanvas-body">
     <div class="container d-flex flex-column gap-2 justify-content-start">
+        <Link :href="route('profile.edit')" class="px-2 py-1 text-start rounded">Edit profile </Link>
         <Link :href="route('logout')" method="POST" class="px-2 py-1 text-start rounded">Logout </Link>
     </div>
   </div>

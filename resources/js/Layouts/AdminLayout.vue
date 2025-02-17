@@ -115,7 +115,7 @@ onMounted(() => {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .main-container .sidebar {

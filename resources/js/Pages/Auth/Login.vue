@@ -27,6 +27,11 @@ const showPassword = ref(false);
 const togglePassword = () => {
   showPassword.value = !showPassword.value;
 };
+const submit = () => {
+  form.post(route("login"), {
+    onFinish: () => form.reset("password"),
+  });
+};
 </script>
 
 <style scoped>

@@ -16,7 +16,7 @@
     </div>
 
     <div>
-      <p class="text-dark me-3">
+      <p class="text-dark me-4">
         All <span v-if="selectedFilter !== 'all'">{{ selectedFilter }}</span> items
       </p>
     </div>
