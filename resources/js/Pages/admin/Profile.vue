@@ -1,6 +1,6 @@
 
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 import { Head, usePage, Link } from "@inertiajs/vue3";
 import { computed, defineProps, onMounted, ref } from "vue";
 const user = usePage().props.auth.user;
@@ -17,7 +17,7 @@ onMounted(() => {
 </script>
 <template>
   <Head title="My profile" />
-  <AuthenticatedLayout>
+  <AdminLayout>
     <div class="main-container1">
       <div
         class="container-fluid d-flex flex-column justify-content-center align-items-center pt-5 gap-2"
@@ -35,13 +35,13 @@ onMounted(() => {
         </div>
 
         <div class="edit">
-          <Link
+          <!-- <Link
             :href="route('user.edit', { user: user.id })"
             class="btn btn-dark"
             ><i class="bi bi-pencil me-2"></i>
             <span class="d-none d-lg-inline">Edit</span>
             </Link
-          >
+          > -->
         </div>
       </div>
 
@@ -57,11 +57,11 @@ onMounted(() => {
 
           <tbody>
             <tr v-for="item in itemsContainer" :key="item.id">
-              <td>{{ item.item_name }}</td>
-              <td>{{ item.item_description }}</td>
+              <td>{{ item.title }}</td>
+              <td>{{ item.description }}</td>
               <td>{{ item.status }}</td>
               <td class="text-end">
-                <Link
+                <Link 
                   :href="route('viewItem', { id: item.id })"
                   class="btn btn-primary ms-0"
                   >View</Link
@@ -76,7 +76,7 @@ onMounted(() => {
         <h1 class="text-dark fw-lighter text-center">No item posted</h1>
       </div>
     </div>
-  </AuthenticatedLayout>
+  </AdminLayout>
 </template>
 
 <style lang="css" scoped>

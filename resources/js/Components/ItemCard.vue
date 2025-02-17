@@ -32,7 +32,7 @@ console.log('items => ' + JSON.stringify(props.items));
         </div>
       </Link>
         <div class="card-body">
-          <h5 class="card-title text-dark mb-0">{{ data.item_name }}</h5>
+          <h5 class="card-title text-dark mb-0">{{ data.title }}</h5>
           <p class="card-text text-muted">{{ data.item_description }}</p>
           <div class="container-fluid d-flex flex-row justify-content-between align-items-center px-0">
             <div class="left">

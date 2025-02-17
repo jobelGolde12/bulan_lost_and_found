@@ -31,7 +31,7 @@ onMounted(() => {
       <div class="d-flex flex-row justify-content-between align-items-center">
         <Link
           v-if="isSidebarOpen"
-          :href="route('profile.edit')"
+          :href="route('profile')"
           class="pointer user-name text-dark text-decoration-none"
         >
           {{ user.name }}
@@ -76,7 +76,7 @@ onMounted(() => {
         <!-- =========================== -->
 
         <Link
-          :href="route('profile.edit')"
+          :href="route('profile')"
           :class="{ active: currentRoute === route('profile.edit') }"
         >
           <div :class="{'icon-container' : !isSidebarOpen}">

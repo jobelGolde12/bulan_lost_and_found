@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/my-profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -38,6 +39,10 @@ Route::prefix('settings')->name('settings')->group(function () {
     Route::get('/privacy', [SettingsController::class, 'privacy'])->name('privacy');
 });
 
+// Admin 
 Route::get('/view-item-info/{item}', [ItemController::class, 'viewItemInfo'])->name('viewItemInfo');
+Route::get('/view-item/{item}', [ItemController::class, 'viewItem'])->name('viewItem');
+Route::delete('delete-item/{id}', [ItemController::class, 'deleteItem'])->name('deleteItem');
+
 
 require __DIR__.'/auth.php';

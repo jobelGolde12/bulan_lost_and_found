@@ -17,7 +17,7 @@ const props = defineProps({
   },  
 });
 
-const itemNameContainer = computed(() => props.items.map(item => item.item_name));
+const itemNameContainer = computed(() => props.items.map(item => item.title));
 const categoriesContainer = computed(() => {
   return [{ id: '', name: 'All', status: 'all' }, ...props.categories];
 });
@@ -95,7 +95,6 @@ const handleSearch = () => {
           </button>
         </div>
       </div>
-
       <!-- List of all categories -->
       <CategoriesList
         :categories="categoriesContainer"

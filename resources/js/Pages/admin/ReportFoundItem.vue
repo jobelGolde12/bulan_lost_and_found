@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { usePage , Head } from '@inertiajs/vue3';
 import { computed, defineProps, onMounted, ref } from 'vue';
@@ -44,7 +44,7 @@ const handleFileChange = (event) => {
 </script>
 <template>
     <Head title="Report Found Item" />
-    <AuthenticatedLayout >
+    <AdminLayout >
     <div class="main-container">
         <h1 class="text-dark fw-light text-center fs-3 mt-3">Report Found Item</h1>
 
@@ -98,7 +98,7 @@ const handleFileChange = (event) => {
             </form>
         </div>
     </div>
-    </AuthenticatedLayout>
+    </AdminLayout>
     
 </template>
 <style lang="css" scoped>

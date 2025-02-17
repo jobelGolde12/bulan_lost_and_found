@@ -74,12 +74,12 @@ const getResponse = (res) => {
 
           <div class="container px-0 d-flex flex-row gap-2 mt-2">
 
-                <Link :href="route('visitUser', {id: data.id})" class="button1 text-decoration-none" v-if="props.created_by.name">
+                <!-- <Link :href="route('visitUser', {id: data.id})" class="button1 text-decoration-none" v-if="props.created_by.name">
                   <span class="d-block d-lg-none"
                     ><i class="bi bi-eye"></i
                   ></span>
                   <span class="d-none d-lg-inline">Visit {{ props.created_by.name }}</span>
-                </Link>
+                </Link> -->
 
                 
                 <Link :href="route('dashboard')" class="btn btn-dark">

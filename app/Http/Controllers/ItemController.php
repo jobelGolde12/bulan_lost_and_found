@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\ItemModel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -30,7 +31,7 @@ class ItemController extends Controller
         }
 
         ItemModel::create([
-            'item_name' => $request->name,
+            'title' => $request->name,
             'item_description' => $request->description,
             'status' => $request->status, 
             'location' => $request->location,
@@ -47,7 +48,7 @@ class ItemController extends Controller
     // para sa profile (sa na himo ni user na item)
     public function viewItem($item){
         $getItem = ItemModel::find($item);
-        return Inertia::render('user/ViewItem', [
+        return Inertia::render('admin/ViewItem', [
             'item' => $getItem
         ]);
     }
@@ -72,9 +73,14 @@ class ItemController extends Controller
         $item = ItemModel::find($id);
         $item->delete();
 
-        $getItem = ItemModel::find($item);
-        return Inertia::render('user/ViewItem', [
-            'item' => $getItem
+        // $getItem = ItemModel::find($item);
+        // return Inertia::render('admin/ViewItem', [
+        //     'item' => $getItem
+        // ]);
+
+        $items = ItemModel::where('user_id', Auth::id())->get();
+        return Inertia::render('admin/Profile', [
+            'items' => $items,  
         ]);
     }
 
