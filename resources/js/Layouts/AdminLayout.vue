@@ -59,7 +59,7 @@ onMounted(() => {
           :class="{ active: currentRoute === route('reportLostItem') }"
         >
           <div :class="{'icon-container' : !isSidebarOpen}">
-            <i class="bi bi-eye-slash link"></i>
+            <i class="bi bi-question-circle link"></i>
           </div>
           <span v-if="isSidebarOpen">Report Lost Item</span>
         </Link>
@@ -68,7 +68,7 @@ onMounted(() => {
           :class="{ active: currentRoute === route('reportFoundItem') }"
         >
           <div :class="{'icon-container' : !isSidebarOpen}">
-            <i class="bi bi-eye link"></i>
+            <i class="bi bi-check-circle link"></i>
           </div>
           <span v-if="isSidebarOpen">Report Found Item</span>
         </Link>

@@ -19,9 +19,15 @@ class ProfileController extends Controller
      */
     public function index(){
         $items = ItemModel::where('user_id', Auth::id())->get();
-        return Inertia::render('admin/Profile', [
-            'items' => $items,  
-        ]);
+        if(Auth::check() && Auth::user()->role === 'admin'){
+            return Inertia::render('admin/Profile', [
+                'items' => $items,  
+            ]);
+        }else{
+            return Inertia::render('user/Profile', [
+                'items' => $items,  
+            ]);
+        }
     }
     public function edit(Request $request): Response
     {

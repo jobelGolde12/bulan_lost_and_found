@@ -55,7 +55,7 @@ onMounted(() => {
         </Link>
 
         <Link
-          :href="route('profile.edit')"
+          :href="route('profile')"
           :class="{ active: currentRoute === route('profile.edit') }"
         >
           <div :class="{'icon-container' : !isSidebarOpen}">
