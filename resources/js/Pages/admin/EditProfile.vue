@@ -31,9 +31,9 @@ const submit = () => {
   const formData = new FormData();
   Object.keys(form.data()).forEach((key) => {
     if (key === "profile_pic" && form.profile_pic) {
-      formData.append(key, form.profile_pic); // Append file if it exists
+      formData.append(key, form.profile_pic);
     } else {
-      formData.append(key, form[key]); // Append other fields
+      formData.append(key, form[key]);
     }
   });
 
@@ -43,9 +43,6 @@ const submit = () => {
     onError: (errors) => console.error("An error occurred:", errors),
   });
 };
-
-console.log("User => ", props.user);
-console.log("UserInfo => ", props.userInfo);
 </script>
 
 <template>
@@ -53,92 +50,88 @@ console.log("UserInfo => ", props.userInfo);
     <Head title="Edit profile" />
     <div class="container container-top">
       <div>
-        <h1 class="text-2xl font-bold mb-4 fw-lighter mt-2 text-center">
+        <h1 class="text-center fw-lighter">
           Edit Profile
         </h1>
       </div>
       <form
         @submit.prevent="submit"
-        class="form mx-auto"
+        class="form mx-auto bg-white p-6 rounded-lg shadow-md w-full max-w-2xl"
         enctype="multipart/form-data"
       >
-      <UploadImage />
+        <UploadImage />
 
-        <div class="row">
-          <div class="col-12 col-lg-6">
-            <div class="mb-4 mt-2">
-              <label for="bio" class="block font-medium">Bio</label>
-              <textarea
-                v-model="form.bio"
-                id="bio"
-                class="rounded px-3 py-2 w-full"
-                placeholder="optional"
-              ></textarea>
-            </div>
-          </div>
-
-          <div class="col-12 col-lg-6 mt-2">
-            <label for="address" class="block font-medium">Address</label>
-            <input
-              v-model="form.address"
-              id="address"
-              class="rounded px-3 py-2 w-full"
-              placeholder="ex: Bonga, Bulan, Sorsogon"
-            />
-          </div>
+        <div class="mb-4">
+          <label for="bio" class="block text-lg font-medium text-gray-700">Bio</label>
+          <textarea
+            v-model="form.bio"
+            id="bio"
+            class="mt-1 block w-full px-4 py-3 border rounded-lg shadow-sm focus:ring focus:ring-blue-300"
+            placeholder="Tell something about yourself"
+          ></textarea>
         </div>
 
-        <div class="row">
-          <div class="col-12 col-lg-6">
-            <label for="contact" class="block font-medium">Contact</label>
-            <input
-              v-model="form.contact"
-              id="contact"
-              type="text"
-              class="rounded px-3 py-2 w-full"
-              placeholder="ex: 09460163977"
-            />
-          </div>
-
-          <div class="col-12 col-lg-6">
-            <label for="facebook_link" class="block font-medium">
-              Social Links (optional)
-            </label>
-            <input
-              type="text"
-              v-model="form.facebook_link"
-              id="facebook_link"
-              class="rounded px-3 py-2 w-full"
-              placeholder="facebook/twitter/instagram/etc."
-            />
-          </div>
+        <div class="mb-4">
+          <label for="address" class="block text-lg font-medium text-gray-700">Address</label>
+          <input
+            v-model="form.address"
+            id="address"
+            class="mt-1 block w-full px-4 py-3 border rounded-lg shadow-sm focus:ring focus:ring-blue-300"
+            placeholder="ex: Bonga, Bulan, Sorsogon"
+          />
         </div>
 
-        <button type="submit" class="btn btn-dark mt-3">Save Changes</button>
+        <div class="mb-4">
+          <label for="contact" class="block text-lg font-medium text-gray-700">Contact</label>
+          <input
+            v-model="form.contact"
+            id="contact"
+            type="text"
+            class="mt-1 block w-full px-4 py-3 border rounded-lg shadow-sm focus:ring focus:ring-blue-300"
+            placeholder="ex: 09460163977"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="facebook_link" class="block text-lg font-medium text-gray-700">Social Links (optional)</label>
+          <input
+            type="text"
+            v-model="form.facebook_link"
+            id="facebook_link"
+            class="mt-1 block w-full px-4 py-3 border rounded-lg shadow-sm focus:ring focus:ring-blue-300"
+            placeholder="facebook/twitter/instagram/etc."
+          />
+        </div>
+
+        <button type="submit" class="btn btn-dark w-100">Save Changes</button>
       </form>
     </div>
   </AuthenticatedLayout>
 </template>
 
 <style scoped>
-.form input,
-.form textarea {
-  border: 1px solid rgba(0, 0, 0, 0.3);
-}
 .container-top {
-  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
+  padding-top: 20rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
-@media screen and (max-width: 800px) {
-  .container-top {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+
+.form input,
+.form textarea {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.form input:focus,
+.form textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
 }
 </style>

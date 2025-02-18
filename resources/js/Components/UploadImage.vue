@@ -7,7 +7,7 @@
     @drop.prevent="handleDrop">
     <label for="profile_pic" class="cursor-pointer w-full text-center py-6">
       <div v-if="!previewImage" class="flex flex-col items-center">
-        <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <svg class="w-20 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0l-4 4m4-4l4 4m10 6v6m0 0l-4-4m4 4l4-4" />
         </svg>
         <p class="text-gray-600 mt-2">Drag and drop an image or <span class="text-blue-500 underline">click to upload</span></p>
