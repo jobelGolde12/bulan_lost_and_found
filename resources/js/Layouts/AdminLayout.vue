@@ -32,9 +32,10 @@ onMounted(() => {
         <Link
           v-if="isSidebarOpen"
           :href="route('profile')"
-          class="pointer user-name text-dark text-decoration-none"
+          class="pointer user-name text-dark text-decoration-none d-flex flex-column gap-0"
         >
-          {{ user.name }}
+          <span class="mb-0 d-block name">{{ user.name }} </span>
+          <span class="text-success text-lighter text-sm d-block admin-text">admin</span>
         </Link>
         <div
           class="bi bi-list pointer text-dark fw-bolder fs-3"
@@ -190,6 +191,12 @@ onMounted(() => {
 
 .sidebar .list a:hover {
   background: rgba(0, 0, 0, 0.1);
+}
+.admin-text{
+  transform: translateY(-20%);
+}
+.name{
+  transform: translateY(20%);
 }
 @media screen and (max-width: 800px) {
   .main-container .sidebar{
