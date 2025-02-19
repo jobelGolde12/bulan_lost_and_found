@@ -64,6 +64,14 @@ class ItemController extends Controller
         ]);
     }
 
+    public function viewItemInfoAsAdmin($item){
+        $getItem = ItemModel::find($item);
+        $created_by = User::find($getItem->user_id);
+        return Inertia::render('admin/ViewItemInfoAsAdmin', [
+            'item' => $getItem,
+            'created_by' => $created_by
+        ]);
+    }
     // kapag in view ni user an item tas in click an visit {{ name }} ma kadto cya sa
     // profile san user na nag himo san item
     public function visitUser($id){

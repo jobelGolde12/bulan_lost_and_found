@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/report-lost-item', [UserController::class, 'reportLostItem'])->name('reportLostItem');
 Route::get('/report-found-item', [UserController::class, 'reportFoundItem'])->name('reportFoundItem');
 Route::post('/add-item', [ItemController::class, 'store'])->name('addItem');
+Route::get('/view-item-info-as-admin/{item}', [ItemController::class, 'viewItemInfoAsAdmin'])->name('viewItemInfoAsAdmin');
 
 Route::prefix('settings')->name('settings')->group(function () {
     Route::get('/trash', [SettingsController::class, 'trash'])->name('trash');

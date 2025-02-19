@@ -4,7 +4,7 @@
       <select
         name="filter"
         id="filter"
-        class="form-control mt-2 fixed-width"
+        class="form-control bg-light mt-2 fixed-width"
         v-model="selectedFilter"
         @change="emitFilter"
       >

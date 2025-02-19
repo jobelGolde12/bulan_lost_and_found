@@ -73,7 +73,7 @@ const handleSearch = () => {
         <div class="search-bar input-group mb-3">
           <input
             type="text"
-            class=""
+            class="bg-light"
             placeholder="Search..."
             aria-label="Search"
             list="categories"
@@ -89,7 +89,7 @@ const handleSearch = () => {
               :key="data?.id"
             ></option>
           </datalist>
-          <button class="btn btn-light" type="button" @click="handleSearch">
+          <button class="btn btn-dark" type="button" @click="handleSearch">
             <i class="bi bi-search"></i>
           </button>
         </div>

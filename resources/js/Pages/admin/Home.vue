@@ -4,7 +4,7 @@ import FilterComponent from "@/Components/user/FilterComponent.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import { computed, defineProps, ref } from "vue";
 import CategoriesList from "@/Components/user/CategoriesList.vue";
-import ItemCard from "@/Components/ItemCard.vue";
+import ItemCardForAdmin from "@/Components/admin/ItemCardForAdmin.vue";
 
 const props = defineProps({
   categories: {
@@ -65,7 +65,7 @@ const handleSearch = () => {
 <template>
   <Head title="Dashboard" />
   <AdminLayout>
-    <div class="main-container">
+    <div class="main-container bg-light">
       <div
         class="container-fluid mt-4 d-flex flex-row justify-content-between align-items-center"
       >
@@ -74,7 +74,7 @@ const handleSearch = () => {
         <div class="search-bar input-group mb-3">
           <input
             type="text"
-            class=""
+            class="bg-light"
             placeholder="Search..."
             aria-label="Search"
             list="categories"
@@ -90,7 +90,7 @@ const handleSearch = () => {
               :key="data?.id"
             ></option>
           </datalist>
-          <button class="btn btn-light" type="button" @click="handleSearch">
+          <button class="btn btn-dark" type="button" @click="handleSearch">
             <i class="bi bi-search"></i>
           </button>
         </div>
@@ -105,7 +105,7 @@ const handleSearch = () => {
       <FilterComponent @filterSelected="handleFilterChange" />
 
       <!-- List of all items -->
-      <ItemCard :items="getItems" />
+      <ItemCardForAdmin :items="getItems" />
 
       <div class="container" v-if="getItems.length === 0">
           <h1 class="text-dark text-center text-muted">No item found...</h1>

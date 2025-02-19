@@ -19,9 +19,9 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="main-container d-flex flex-row justify-content-between align-items-center">
+  <div class="main-container bg-light d-flex flex-row justify-content-between align-items-center">
     <div
-      class="sidebar bg-light"
+      class="sidebar"
       :class="{ 'closed': !isSidebarOpen }"
       :style="{
         width: isSidebarOpen ? '250px' : '5%',
@@ -31,10 +31,11 @@ onMounted(() => {
       <div class="d-flex flex-row justify-content-between align-items-center">
         <Link
           v-if="isSidebarOpen"
-          :href="route('profile.edit')"
-          class="pointer user-name text-dark text-decoration-none"
+          :href="route('profile')"
+          class="pointer user-name text-dark text-decoration-none d-flex flex-column gap-0"
         >
-          {{ user.name }}
+          <span class="mb-0 d-block name">{{ user.name }} </span>
+          <span class="text-success text-lighter text-sm d-block user-text">user</span>
         </Link>
         <div
           class="bi bi-list pointer text-dark fw-bolder fs-3"
@@ -106,12 +107,12 @@ onMounted(() => {
   position: relative;
   top: 0;
   height: 100vh;
-  /* background-color: #eeeeee; */
+  background-color: #eeeeee;
   padding: 20px;
   transition: width 0.3s ease;
   overflow: hidden;
   width: 20%;
-  border-radius: 20px;
+  border-radius: 0 30px 30px 0;
 }
 
 .main-container .right{
@@ -174,6 +175,12 @@ onMounted(() => {
 
 .sidebar .list a:hover {
   background: rgba(0, 0, 0, 0.1);
+}
+.user-text{
+  transform: translateY(-10%);
+}
+.name{
+  transform: translateY(20%);
 }
 @media screen and (max-width: 800px) {
   .main-container .sidebar{

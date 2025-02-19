@@ -19,9 +19,9 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="main-container d-flex flex-row justify-content-between align-items-center">
+  <div class="main-container bg-light d-flex flex-row justify-content-between align-items-center">
     <div
-      class="sidebar bg-light"
+      class="sidebar"
       :class="{ 'closed': !isSidebarOpen }"
       :style="{
         width: isSidebarOpen ? '250px' : '5%',
@@ -123,13 +123,13 @@ onMounted(() => {
   position: relative;
   top: 0;
   height: 100vh;
-  /* background-color: #eeeeee; */
+  background-color: #eeeeee;
   padding: 20px;
   transition: width 0.3s ease;
   overflow: hidden;
   width: 20%;
   font-size: large;
-  border-radius: 0 15px 15px 0;
+  border-radius: 0 30px 30px 0;
 }
 
 .main-container .right{

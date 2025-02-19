@@ -16,7 +16,7 @@ class DashboardController extends Controller
         }
         
         $categories = ItemCategories::all();
-        $items = ItemModel::with('user:id,name')->get();
+        $items = ItemModel::with('user:id,name', 'category:name,description')->get();
         if (Auth::check() && Auth::user()->role === 'user') { 
             return Inertia::render('user/Dashboard', [
                 'categories' => $categories,

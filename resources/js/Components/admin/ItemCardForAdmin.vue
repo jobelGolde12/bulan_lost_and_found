@@ -21,7 +21,7 @@ console.log('items => ' + JSON.stringify(props.items));
       v-for="data in itemContainer"
       :key="data.id"
     >
-      <Link :href="route('viewItemInfo', { item: data.id })" class="text-decoration-none">
+      <Link :href="route('viewItemInfoAsAdmin', { item: data.id })" class="text-decoration-none">
         <div class="image-container">
           <img
             :src="data.image_url"
@@ -41,7 +41,7 @@ console.log('items => ' + JSON.stringify(props.items));
                 href="#"
                 class=" ps-0 d-flex flex-row gap-2 align-items-center"
                 >
-                  <div><img src="../../images/profile.png" alt="profile" class="default-profile"></div>
+                  <div><img src="../../../images/profile.png" alt="profile" class="default-profile"></div>
                       <div class="owner_name">{{ data.user?.name || 'user' }}</div>
                   </div>
             </div>

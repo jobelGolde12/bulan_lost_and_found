@@ -29,8 +29,11 @@ onMounted(() => {
         </div>
 
         <div>
-          <div class="name fs-2 text-center">{{ user.name }}</div>
-          <div class="bio text-muted">
+          <div class="d-flex flex-column gap-0">
+            <div class="name fs-2 text-center">{{ user.name }}</div>
+            <div class="text-success text-sm text-center">user</div>
+          </div>
+          <div class="bio text-muted text-start">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa,
             quibusdam!
           </div>
@@ -85,7 +88,6 @@ onMounted(() => {
 .main-container1 {
   position: relative;
   width: 100%;
-  height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 0 2rem;
