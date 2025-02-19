@@ -32,9 +32,12 @@ console.log('items => ' + JSON.stringify(props.items));
         </div>
       </Link>
         <div class="card-body">
-          <h5 class="card-title text-dark mb-0">{{ data.title }}</h5>
-          <p class="card-text text-muted">{{ data.item_description }}</p>
-          <p class="text-success">{{ data.category?.name || 'null'}}</p>
+          <div class="d-flex flex-column gap-0 m-0 p-0">
+              <h5 class="card-title text-dark mb-0 fw-bolder">{{ data.title }}</h5>
+              <p class="card-text text-muted m-0">{{ data.item_description }}</p>
+              <p class="text-success m-0">{{ data.category?.name || 'null' }}</p>
+          </div>
+
           <div class="container-fluid d-flex flex-row justify-content-between align-items-center px-0">
             <div class="left">
                   <div
@@ -73,6 +76,7 @@ console.log('items => ' + JSON.stringify(props.items));
 .card {
   border-radius: 8px;
   max-width: 18rem;
+  min-height: 300px;
   width: 100%;
   padding: 15px;
   background-color: white;

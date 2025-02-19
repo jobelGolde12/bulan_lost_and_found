@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\TrashController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,8 @@ Route::get('/report-lost-item', [UserController::class, 'reportLostItem'])->name
 Route::get('/report-found-item', [UserController::class, 'reportFoundItem'])->name('reportFoundItem');
 Route::post('/add-item', [ItemController::class, 'store'])->name('addItem');
 Route::get('/view-item-info-as-admin/{item}', [ItemController::class, 'viewItemInfoAsAdmin'])->name('viewItemInfoAsAdmin');
+Route::post('/trash/restore/{id}', [TrashController::class, 'restore'])->name('trash.restore');
+Route::get('/trash', [TrashController::class, 'index'])->name('trash.index');
 
 Route::prefix('settings')->name('settings')->group(function () {
     Route::get('/trash', [SettingsController::class, 'trash'])->name('trash');

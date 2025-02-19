@@ -96,6 +96,16 @@ onMounted(() => {
           <span v-if="isSidebarOpen">Settings</span>
         </Link> -->
 
+        <Link
+          :href="route('trash.index')"
+          :class="{ active: currentRoute === route('trash.index') }"
+        >
+          <div :class="{'icon-container' : !isSidebarOpen}">
+            <i class="bi bi-trash link"></i>
+          </div>
+          <span v-if="isSidebarOpen">Trash</span>
+        </Link>
+
 
       </div>
     </div>
