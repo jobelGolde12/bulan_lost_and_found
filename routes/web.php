@@ -43,6 +43,11 @@ Route::prefix('settings')->name('settings')->group(function () {
     Route::get('/privacy', [SettingsController::class, 'privacy'])->name('privacy');
 });
 
+Route::delete('/admin/item/trash/{id}', [TrashController::class, 'trashItem'])->name('trashItem');
+Route::post('/admin/item/restore/{id}', [TrashController::class, 'restore'])->name('restoreItem');
+Route::delete('/admin/item/destroy/{id}', [TrashController::class, 'destroy'])->name('destroyItem');
+
+
 // Admin 
 Route::get('/view-item-info/{item}', [ItemController::class, 'viewItemInfo'])->name('viewItemInfo');
 Route::get('/view-item/{item}', [ItemController::class, 'viewItem'])->name('viewItem');

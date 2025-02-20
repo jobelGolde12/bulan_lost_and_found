@@ -2,6 +2,7 @@
 import { usePage, router, Head } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+import TrashLayout from '@/Layouts/TrashLayout.vue';
 // Fetch trashed items from props
 const trashedItems = ref(usePage().props.trashed_items || []);
 
@@ -20,12 +21,12 @@ const restoreItem = (id) => {
 <template>
   <Head title="Trash" />
    <AdminLayout>
+    <TrashLayout>
     <div class="container mt-4">
-        <h2 class="mb-3">Trash Bin</h2>
-
-        <div v-if="trashedItems.length === 0" class="alert alert-info">
-            No trashed items available.
-        </div>
+            <div  v-if="trashedItems.length === 0"  class="container image-container1 mx-auto d-flex flex-column align-items-center justify-content-center gap-3">
+                <img src="../../../../images/no-data.svg" alt="Image" class="relative w-50">
+                <p class="text-center"> No trashed items available.</p>
+            </div>
 
         <div v-else class="row">
             <div v-for="item in trashedItems" :key="item.id" class="col-md-4">
@@ -43,6 +44,7 @@ const restoreItem = (id) => {
             </div>
         </div>
     </div>
+    </TrashLayout>
    </AdminLayout>
 </template>
 
@@ -54,5 +56,9 @@ const restoreItem = (id) => {
 
 .card:hover {
     transform: scale(1.02);
+}
+.image-container1{
+    width: 50%;
+    
 }
 </style>

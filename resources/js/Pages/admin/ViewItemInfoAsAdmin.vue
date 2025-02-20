@@ -2,6 +2,7 @@
 import { ref, watch } from "vue";
 import { Link, useForm, Head } from "@inertiajs/vue3";
 import CustomModal from "@/Components/CustomModal.vue";
+
 const props = defineProps({
   item: {
     type: Object,
@@ -25,44 +26,41 @@ watch(
   { immediate: true }
 );
 
-const deleteItem = useForm({
-  id: data.id,
-});
+const deleteItem = useForm({});
 
-// response hali sa modal kung gusto ni user eh delete an item
 const getResponse = (res) => {
-  try {
-    if (res === "yes") {
-      deleteItem.delete(route("deleteItem", { id: props.item?.id }), {
-        onSuccess: () => alert("deleted"),
-        onError: (errors) => console.log("error => " + errors),
-      });
-    }
-  } catch (err) {
-    alert("item cannot be deleted.");
-    console.error("an error occured while deleting data => ", err);
+  if (res === "yes") {
+    deleteItem.delete(route("trashItem", { id: props.item?.id }), {
+      onSuccess: () => {
+        alert("Item moved to trash");
+        data.value = {}; // Clear data to simulate removal
+      },
+      onError: (errors) => console.log("Error:", errors),
+    });
   }
 };
+console.log("id => ", props.item?.id)
 </script>
 
 <template>
-  <Head title="View item info"/>
+  <Head title="View Item Info" />
   <div class="main-container bg-light row">
-      <div v-if="Object.keys(data).length > 0" class="left col-12 col-sm-6 col-lg-6">
-        <div class="card bg-light">
-          <div class="card-body">
-            <div class="image-container">
-              <img v-if="data.image_url" :src="data.image_url" alt="Item Image" class="rounded"/>
-            </div>
-            <h1 class="my-2">{{ data?.item_name || "No name provided" }}</h1>
+    <div v-if="Object.keys(data).length > 0" class="left col-12 col-sm-6 col-lg-6">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="image-container">
+            <img v-if="data.image_url" :src="data.image_url" alt="Item Image" class="rounded"/>
           </div>
         </div>
       </div>
+    </div>
+
     <div class="right col-12 col-sm-6 col-lg-6">
       <div class="card bg-light">
         <div v-if="Object.keys(data).length > 0">
           <div class="card-body">
-            <h1 :class="data.status === 'Lost' ? 'text-danger' : 'text-success'">{{ data.status }}</h1>
+            <h1 :class="data.status === 'Lost' ? 'text-danger' : 'text-success'" class="text-center">{{ data.status }}</h1>
+            <p class="my-2"><strong>Name: </strong>{{ data?.item_name || "No name provided" }}</p>
             <p><strong>Description:</strong> {{ data.item_description }}</p>
             <p><strong>Location:</strong> {{ data.location }}</p>
             <p v-if="data.category">
@@ -80,19 +78,16 @@ const getResponse = (res) => {
             </p>
 
             <div class="container px-0 d-flex flex-row gap-2 mt-2">
-              <!-- <Link :href="route('visitUser', {id: data.id})" class="button1 text-decoration-none" v-if="props.created_by.name">
-                  <span class="d-block d-lg-none"
-                    ><i class="bi bi-eye"></i
-                  ></span>
-                  <span class="d-none d-lg-inline">Visit {{ props.created_by.name }}</span>
-                </Link> -->
-
               <Link :href="route('dashboard')" class="btn btn-dark">
-                <span class="d-block d-lg-none"
-                  ><i class="bi bi-arrow-left"></i
-                ></span>
+                <span class="d-block d-lg-none"><i class="bi bi-arrow-left"></i></span>
                 <span class="d-none d-lg-inline">Back</span>
               </Link>
+
+              <!-- DELETE BUTTON (MOVES TO TRASH) -->
+              <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#customModal">
+                <span class="d-block d-lg-none"><i class="bi bi-trash"></i></span>
+                <span class="d-none d-lg-inline">Delete</span>
+              </button>
             </div>
           </div>
         </div>
@@ -100,11 +95,10 @@ const getResponse = (res) => {
           <p>Loading item details...</p>
         </div>
       </div>
-      asd
     </div>
   </div>
 
-  <CustomModal :name="deleteMessage" :id="data.id" @response="getResponse" />
+  <CustomModal ref="deleteModal" :name="deleteMessage" :id="data.id" @response="getResponse" />
 </template>
 
 <style scoped>
@@ -113,20 +107,21 @@ const getResponse = (res) => {
   height: 100vh;
   overflow: hidden;
 }
-.image-container{
+.image-container {
   overflow: hidden;
   min-width: 150px;
+  height: 800px;
 }
-.image-container img{
+.image-container img {
   position: relative;
   width: 100%;
   height: 70%;
-  transition: .5s;
+  transition: 0.5s;
 }
-.image-container img:hover{
+.image-container img:hover {
   transform: scale(1.1);
 }
-.card{
+.card {
   border: none;
 }
 </style>
