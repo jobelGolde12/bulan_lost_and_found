@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
@@ -52,6 +53,7 @@ Route::delete('/admin/item/destroy/{id}', [TrashController::class, 'destroy'])->
 Route::get('/view-item-info/{item}', [ItemController::class, 'viewItemInfo'])->name('viewItemInfo');
 Route::get('/view-item/{item}', [ItemController::class, 'viewItem'])->name('viewItem');
 Route::delete('delete-item/{id}', [ItemController::class, 'deleteItem'])->name('deleteItem');
-
+Route::get('/items', [AdminDashboard::class, 'item'])->name('items');
+Route::get('/admin-dashboard', [AdminDashboard::class, 'index'])->name('adminDashboard');
 
 require __DIR__.'/auth.php';

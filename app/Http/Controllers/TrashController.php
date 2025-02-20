@@ -14,7 +14,8 @@ class TrashController extends Controller
     // Show all trashed items
     public function index()
     {
-        $trashedItems = TrashModel::all();
+        $trashedItems = TrashModel::onlyTrashed()->get();  
+        Log::info('Trash => ' . $trashedItems);
         return Inertia::render('admin/trash/ItemTrash', ['items' => $trashedItems]);
     }
 

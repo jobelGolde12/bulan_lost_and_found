@@ -11,7 +11,7 @@ const props = defineProps({
 });
 let viewLater = ref(false);
 const itemContainer = computed(() => props.items);
-console.log('items => ' + JSON.stringify(props.items)); 
+console.log('category => ' + JSON.stringify(data.category.name)); 
 </script>
 
 <template>

@@ -16,14 +16,14 @@ class DashboardController extends Controller
         }
         
         $categories = ItemCategories::all();
-        $items = ItemModel::with('user:id,name', 'category:name,description')->get();
+        $items = ItemModel::with('user:id,name', 'category:name')->get();
         if (Auth::check() && Auth::user()->role === 'user') { 
             return Inertia::render('user/Dashboard', [
                 'categories' => $categories,
                 'items' => $items,
         ]); 
         }else if (Auth::check() && Auth::user()->role === 'admin') { 
-            return Inertia::render('admin/Home', [
+            return Inertia::render('admin/Dashboard', [
                 'categories' => $categories,
                 'items' => $items,
         ]); 
