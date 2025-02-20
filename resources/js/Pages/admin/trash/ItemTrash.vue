@@ -4,7 +4,13 @@ import { ref } from 'vue';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import TrashLayout from '@/Layouts/TrashLayout.vue';
 // Fetch trashed items from props
-const trashedItems = ref(usePage().props.trashed_items || []);
+const props = usePage({
+    items:{
+        type: Array,
+        default: () => []
+    }
+});
+const trashedItems = ref(props.items || []);
 
 // Restore item function
 const restoreItem = (id) => {
@@ -16,6 +22,7 @@ const restoreItem = (id) => {
         });
     }
 };
+console.log("items => " , trashedItems)
 </script>
 
 <template>
@@ -25,7 +32,7 @@ const restoreItem = (id) => {
     <div class="container mt-4">
             <div  v-if="trashedItems.length === 0"  class="container image-container1 mx-auto d-flex flex-column align-items-center justify-content-center gap-3">
                 <img src="../../../../images/no-data.svg" alt="Image" class="relative w-50">
-                <p class="text-center"> No trashed items available.</p>
+                <p class="text-center ms-4"> No trashed items available.</p>
             </div>
 
         <div v-else class="row">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ItemCategories;
 use App\Models\ItemModel;
 use App\Models\TrashModel;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class TrashController extends Controller
     // Show all trashed items
     public function index()
     {
-        $trashedItems = TrashModel::onlyTrashed()->get();
+        $trashedItems = TrashModel::all();
         return Inertia::render('admin/trash/ItemTrash', ['items' => $trashedItems]);
     }
 
@@ -37,7 +38,12 @@ class TrashController extends Controller
       ]);
 
         $item->delete();
-        return Inertia::render('admin/Home');
+        $categories = ItemCategories::all();
+        $items = ItemModel::with('user:id,name', 'category:name,description')->get();
+        return Inertia::render('admin/Home', [
+          'categories' => $categories,
+          'items' => $items,
+        ]);
     }
 
     // Restore item from trash
