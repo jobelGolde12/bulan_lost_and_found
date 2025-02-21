@@ -4,6 +4,10 @@ import { defineProps } from 'vue';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import TotalLostItemCard from '@/Components/admin/dashboard/TotalLostItemCard.vue';
 import TotalFoundItemCard from '@/Components/admin/dashboard/TotalFoundItemCard.vue';
+import ResolveCasesChart from '@/Components/admin/dashboard/ResolveCasesChart.vue';
+import PendingRequestCard from '@/Components/admin/dashboard/PendingRequestCard.vue';
+import UserRegistration from '@/Components/admin/dashboard/UserRegistration.vue';
+
 const props = defineProps({
   categories: {
     type: Array,
@@ -16,14 +20,6 @@ const props = defineProps({
 });
 const countLostItems = props.items.filter(item => item.status === 'Lost')
 const countFoundItems = props.items.filter(item => item.status === 'Found')
-
-const cards = [
-  { title: 'Total Lost Items', description: 'Count of lost items reported.' },
-  { title: 'Total Found Items', description: 'Count of found items reported.' },
-  { title: 'Resolved Cases', description: 'Number of matched lost and found items.' },
-  { title: 'Pending Requests', description: 'Reports that require admin approval or action.' },
-  { title: 'User Registrations', description: 'Number of registered users.' }
-];
 
 const storageProgress = 75; // Example percentage for resolved cases
 const storageDetails = [
@@ -43,7 +39,7 @@ const recentFiles = [
   <Head title="Dashboard" />
   <AdminLayout>
     <div class="dashboard-container">
-      <div class="container-top container-fluid row" style="min-height: 300px;">
+      <div class="container-top container-fluid row" style="min-height: 300px;  max-height: 200px;" >
             <div class="col-12 col-md-6 col-lg-6 pt-4">
               <h1 class="fw-bold">Lost & Found Admin Dashboard</h1>
               <p class="text-muted">Manage reports, users, and system settings effectively.</p>
@@ -52,26 +48,25 @@ const recentFiles = [
           <div class="col-12 col-md-6 col-lg-6 d-flex flex-row gap-2">
            <TotalLostItemCard :lostItems="countLostItems?.length"/>
            <TotalFoundItemCard :foundItems="countFoundItems?.length"/>
-
-      </div>
-      </div>
-      <!-- Cards Section -->
-      <div class="row mb-4">
-        <div class="col-md-4" v-for="(card, index) in cards" :key="index">
-          <div class="card h-100 text-center shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">{{ card.title }}</h5>
-              <p class="card-text">{{ card.description }}</p>
-            </div>
           </div>
-        </div>
       </div>
 
-      <!-- Storage and Recent Files Section -->
-      <div class="row">
-        <!-- Storage Chart Section -->
-        <div class="col-md-4 mb-4">
-          <div class="card shadow-sm">
+      <div class="contaner-fluid">
+            <ResolveCasesChart />
+          </div>
+
+      <!-- Cards Section -->
+      <div class="d-flex flex-row justify-content-between align-items-center">
+        <div class="">
+          <PendingRequestCard />
+        </div>
+        
+        <div class="">
+          <UserRegistration />
+        </div>
+
+        <div class="as">
+          <div class="card shadow-sm" style="min-width: 250px;">
             <div class="card-body">
               <h5 class="card-title">Overview</h5>
               <div class="d-flex justify-content-center align-items-center my-3">
@@ -85,11 +80,13 @@ const recentFiles = [
                 </li>
               </ul>
             </div>
-          </div>
         </div>
+        </div>
+      </div>
+
 
         <!-- Recent Files Section -->
-        <div class="col-md-8 mb-4">
+        <div class="container-fluid mt-5">
           <div class="card shadow-sm">
             <div class="card-body">
               <h5 class="card-title">Recent Lost & Found Reports</h5>
@@ -112,7 +109,6 @@ const recentFiles = [
             </div>
           </div>
         </div>
-      </div>
     </div>
   </AdminLayout>
 </template>
@@ -123,6 +119,9 @@ const recentFiles = [
 }
 .dashboard-container {
   padding: 20px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 .progress-circle {
   width: 100px;

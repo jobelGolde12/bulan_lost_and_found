@@ -54,6 +54,17 @@ onMounted(() => {
           </div>
           <span v-if="isSidebarOpen">Home</span>
         </Link>
+
+        <Link
+          :href="route('items')"
+          :class="{ active: currentRoute === route('items') }"
+        >
+          <div :class="{'icon-container' : !isSidebarOpen}">
+            <i class="bi bi-box link"></i>
+          </div>
+          <span v-if="isSidebarOpen">Items</span>
+        </Link>
+
         <Link
           :href="route('reportLostItem')"
           :class="{ active: currentRoute === route('reportLostItem') }"
