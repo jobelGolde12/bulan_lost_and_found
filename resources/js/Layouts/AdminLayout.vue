@@ -46,25 +46,14 @@ onMounted(() => {
 
       <div class="list mt-4">
         <Link
-          :href="route('adminDashboard')"
-          :class="{ active: currentRoute === route('adminDashboard') }"
+          :href="route('dashboard')"
+          :class="{ active: currentRoute === route('dashboard') }"
         >
           <div :class="{'icon-container' : !isSidebarOpen}">
             <i class="bi bi-house link"></i>
           </div>
           <span v-if="isSidebarOpen">Home</span>
         </Link>
-
-        <Link
-          :href="route('items')"
-          :class="{ active: currentRoute === route('items') }"
-        >
-          <div :class="{'icon-container' : !isSidebarOpen}">
-            <i class="bi bi-box link"></i>
-          </div>
-          <span v-if="isSidebarOpen">Items</span>
-        </Link>
-
         <Link
           :href="route('reportLostItem')"
           :class="{ active: currentRoute === route('reportLostItem') }"
@@ -144,7 +133,8 @@ onMounted(() => {
   position: relative;
   top: 0;
   height: 100vh;
-  background-color: #eeeeee;
+  /* background-color: #eeeeee; */
+  background-color: #fff;
   padding: 20px;
   transition: width 0.3s ease;
   overflow: hidden;

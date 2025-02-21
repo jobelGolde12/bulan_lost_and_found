@@ -1,110 +1,126 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
+import { defineProps } from 'vue';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+import TotalLostItemCard from '@/Components/admin/dashboard/TotalLostItemCard.vue';
+import TotalFoundItemCard from '@/Components/admin/dashboard/TotalFoundItemCard.vue';
+const props = defineProps({
+  categories: {
+    type: Array,
+    default: [],
+  },
+  items: {
+    type: Array,
+    default: [],
+  },  
+});
+const countLostItems = props.items.filter(item => item.status === 'Lost')
+const countFoundItems = props.items.filter(item => item.status === 'Found')
 
-const  cards = [
-        { title: 'Folder 1', description: 'Details about folder 1' },
-        { title: 'Folder 2', description: 'Details about folder 2' },
-        { title: 'Folder 3', description: 'Details about folder 3' },
-      ]
-// export default {
-//   data() {
-//     return {
-//       cards: [
-//         { title: 'Folder 1', description: 'Details about folder 1' },
-//         { title: 'Folder 2', description: 'Details about folder 2' },
-//         { title: 'Folder 3', description: 'Details about folder 3' },
-//       ],
-//       storageProgress: 65, // Example percentage
-//       storageDetails: [
-//         { label: 'Documents', color: '#4CAF50' },
-//         { label: 'Images', color: '#2196F3' },
-//         { label: 'Videos', color: '#FF9800' },
-//       ],
-//       recentFiles: [
-//         { name: 'File 1', date: '2025-02-20', size: '1.2 MB' },
-//         { name: 'File 2', date: '2025-02-19', size: '2.4 MB' },
-//         { name: 'File 3', date: '2025-02-18', size: '3.5 MB' },
-//       ],
-//     };
-//   },
-// };
+const cards = [
+  { title: 'Total Lost Items', description: 'Count of lost items reported.' },
+  { title: 'Total Found Items', description: 'Count of found items reported.' },
+  { title: 'Resolved Cases', description: 'Number of matched lost and found items.' },
+  { title: 'Pending Requests', description: 'Reports that require admin approval or action.' },
+  { title: 'User Registrations', description: 'Number of registered users.' }
+];
+
+const storageProgress = 75; // Example percentage for resolved cases
+const storageDetails = [
+  { label: 'Lost Items', color: '#FF5733' },
+  { label: 'Found Items', color: '#33FF57' },
+  { label: 'Resolved Cases', color: '#3357FF' }
+];
+
+const recentFiles = [
+  { name: 'Lost Wallet', date: '2025-02-19', size: 'Electronics' },
+  { name: 'Found Phone', date: '2025-02-18', size: 'Accessories' },
+  { name: 'Lost Keys', date: '2025-02-17', size: 'Personal Items' }
+];
 </script>
 
 <template>
   <Head title="Dashboard" />
   <AdminLayout>
     <div class="dashboard-container">
-    <!-- Header Section -->
-    <div class="header-section mb-4">
-      <h1 class="fw-bold">Manage your folders</h1>
-      <p class="text-muted">Create folders to store files and easily access them in locations.</p>
-    </div>
-
-    <!-- Cards Section -->
-    <div class="row mb-4">
-      <div class="col-md-4" v-for="(card, index) in cards" :key="index">
-        <div class="card h-100 text-center shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">{{ card.title }}</h5>
-            <p class="card-text">{{ card.description }}</p>
+      <div class="container-top container-fluid row" style="min-height: 300px;">
+            <div class="col-12 col-md-6 col-lg-6 pt-4">
+              <h1 class="fw-bold">Lost & Found Admin Dashboard</h1>
+              <p class="text-muted">Manage reports, users, and system settings effectively.</p>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Storage and Recent Files Section -->
-    <div class="row">
-      <!-- Storage Chart Section -->
-      <div class="col-md-4 mb-4">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">Storage</h5>
-            <div class="d-flex justify-content-center align-items-center my-3">
-              <div class="progress-circle" :style="{ '--progress': storageProgress + '%' }">
-                <span>{{ storageProgress }}%</span>
-              </div>
+          <div class="col-12 col-md-6 col-lg-6 d-flex flex-row gap-2">
+           <TotalLostItemCard :lostItems="countLostItems?.length"/>
+           <TotalFoundItemCard :foundItems="countFoundItems?.length"/>
+
+      </div>
+      </div>
+      <!-- Cards Section -->
+      <div class="row mb-4">
+        <div class="col-md-4" v-for="(card, index) in cards" :key="index">
+          <div class="card h-100 text-center shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">{{ card.title }}</h5>
+              <p class="card-text">{{ card.description }}</p>
             </div>
-            <ul class="list-unstyled text-muted">
-              <li v-for="(item, index) in storageDetails" :key="index">
-                <span class="dot" :style="{ 'background-color': item.color }"></span> {{ item.label }}
-              </li>
-            </ul>
           </div>
         </div>
       </div>
 
-      <!-- Recent Files Section -->
-      <div class="col-md-8 mb-4">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">Recent Files</h5>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>File Name</th>
-                  <th>Date</th>
-                  <th>Size</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(file, index) in recentFiles" :key="index">
-                  <td>{{ file.name }}</td>
-                  <td>{{ file.date }}</td>
-                  <td>{{ file.size }}</td>
-                </tr>
-              </tbody>
-            </table>
+      <!-- Storage and Recent Files Section -->
+      <div class="row">
+        <!-- Storage Chart Section -->
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Overview</h5>
+              <div class="d-flex justify-content-center align-items-center my-3">
+                <div class="progress-circle" :style="{ '--progress': storageProgress + '%' }">
+                  <span>{{ storageProgress }}%</span>
+                </div>
+              </div>
+              <ul class="list-unstyled text-muted">
+                <li v-for="(item, index) in storageDetails" :key="index">
+                  <span class="dot" :style="{ 'background-color': item.color }"></span> {{ item.label }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Files Section -->
+        <div class="col-md-8 mb-4">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Recent Lost & Found Reports</h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Item Name</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(file, index) in recentFiles" :key="index">
+                    <td>{{ file.name }}</td>
+                    <td>{{ file.date }}</td>
+                    <td>{{ file.size }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </AdminLayout>
 </template>
 
-
-<style>
+<style scoped>
+.container-top{
+  height: 70%;
+}
 .dashboard-container {
   padding: 20px;
 }
